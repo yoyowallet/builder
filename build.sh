@@ -143,8 +143,7 @@ else
 		docker logs -f ${PROJECT_NAME}_sut_1
 		RET=$(docker wait ${PROJECT_NAME}_sut_1)
 		docker-compose -f ${TEST_FILENAME} -p $PROJECT_NAME kill
-		docker-compose -f ${TEST_FILENAME} -p $PROJECT_NAME rm --force -v
-		docker network ls --filter name=${PROJECT_NAME} --quiet | xargs docker network rm
+		docker-compose -f ${TEST_FILENAME} -p $PROJECT_NAME down -v
 		if [ "$RET" != "0" ]; then
 			print_msg "   Tests in $TEST_FILENAME FAILED: $RET"
 			exit 1
