@@ -133,7 +133,8 @@ else
 		fi
 
 		PROJECT_NAME=$(echo $HOSTNAME | tr '[:upper:]' '[:lower:]' | sed s/\\.//g | sed s/-//g)
-		docker-compose -f ${TEST_FILENAME} -p $PROJECT_NAME build
+		docker-compose -f ${TEST_FILENAME} -p $PROJECT_NAME pull
+		docker-compose -f ${TEST_FILENAME} -p $PROJECT_NAME build --pull
 
 		if [ -z "$IMAGE_NAME" ]; then
 			rm -f /root/.dockercfg
